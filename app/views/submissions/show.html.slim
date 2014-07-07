@@ -5,7 +5,7 @@ p
   strong Feedback:
   = @submission.feedback
 
-- if @submission.document
+- if @submission.document.exists?
   = link_to "View your submission", @submission.document.url
 - else
   = form_for(@submission) do |f|

@@ -1,5 +1,6 @@
 class AssignmentsController < ApplicationController
   before_action :set_assignment, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_permission, only: [:new, :create, :edit, :update, :destroy, :index]
 
   # GET /assignments
   # GET /assignments.json
@@ -65,6 +66,13 @@ class AssignmentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_assignment
       @assignment = Assignment.find(params[:id])
+    end
+
+    def ensure_permission
+      if current_user.type == :student
+        flash[:alert] = "You do not have permission to take this action on assignments."
+        redirect_to user_path(current_user) and return
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
