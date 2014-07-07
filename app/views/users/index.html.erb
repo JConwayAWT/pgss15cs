@@ -20,5 +20,5 @@
 
 <br>
 
-<%= link_to 'New User', new_user_path %><br>
+<%= link_to 'New User', new_user_registration_path %><br>
 <%= link_to 'Sign out', destroy_user_session_path(current_user), method: :delete if signed_in? %>
