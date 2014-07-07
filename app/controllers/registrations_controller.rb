@@ -5,7 +5,14 @@ class RegistrationsController < Devise::RegistrationsController
       redirect_to new_user_registration_path and return
     end
 
+    if (params[:user][:first_name].blank? or params[:user][:last_name].blank?)
+      flash[:alert] = "You must include both first name and last name."
+      redirect_to new_user_registration_path and return
+    end
+
     build_resource(sign_up_params)
+    resource.first_name = params[:user][:first_name]
+    resource.last_name = params[:user][:last_name]
 
     resource_saved = resource.save
     yield resource if block_given?
