@@ -1,0 +1,21 @@
+.row
+  .col-md-10.col-md-offset-1
+    h1.text-center = @assignment.name
+
+.row
+  .col-md-5.col-md-offset-1
+    b Due Date: 
+    | #{@assignment.duedate.strftime("%D %H:%M")}
+
+  .col-md-5.text-right
+    b Current status: 
+    | #{@assignment.status}
+p
+  strong Status:
+  = @assignment.status
+p
+  strong Duedate:
+  = @assignment.duedate
+= link_to 'Edit', edit_assignment_path(@assignment)
+br
+= link_to 'Back', assignments_path

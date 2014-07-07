@@ -1,0 +1,35 @@
+doctype html
+html
+  head
+    title Pgss14cs
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body
+    nav.navbar.navbar-inverse#no-border-radius role="navigation"
+      .container-fluid
+        .navbar-header
+          .navbar-brand PGSS CS 2014
+
+        ul.nav.navbar-nav.navbar-right
+          - if signed_in?
+            li
+              = link_to "Sign out", destroy_user_session_path, method: :delete, style: "color:white;"
+          - else
+            li
+              = link_to "Sign in", new_user_session_path, style: "color:white;"
+
+    .row
+      .col-md-6.col-md-offset-3
+        .notice.application-notice.text-center
+          - if notice
+            .alert.alert-info = notice
+
+    .row
+      .col-md-6.col-md-offset-3
+        .alert.application-alert.text-center
+          - if alert
+            .alert.alert-danger = alert
+
+    .container
+      = yield

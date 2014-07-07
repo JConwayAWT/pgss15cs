@@ -1,0 +1,16 @@
+.row
+  .col-md-6.col-md-offset-3
+    .text-center
+      h2 Sign up
+
+.row
+  .col-md-6.col-md-offset-3
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .form-group
+        = f.email_field :email, autofocus: true, placeholder: "Email address", class: "form-control"
+      .form-group
+        = f.password_field :password, placeholder: "Password", class: "form-control"
+      .text-center
+        = f.submit "Sign in", class: "btn btn-primary"
+
+    = render "devise/shared/links"
