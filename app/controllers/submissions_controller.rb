@@ -42,8 +42,16 @@ class SubmissionsController < ApplicationController
   # PATCH/PUT /submissions/1
   # PATCH/PUT /submissions/1.json
   def update
+    if signed_in? and current_user.type == :ta and submission_params[:feedback].blank? and params[:submission][:status] != "Open"
+      flash[:alert] = "You must include feedback when the status is something other than open."
+      redirect_to submission_path(@submission) and return
+    end
+
     respond_to do |format|
       if @submission.update(submission_params)
+        a = @submission.assignment
+        a.status = params[:submission][:status] unless params[:submission][:status].blank?
+        a.save!
         format.html { redirect_to @submission, notice: 'Submission was successfully updated.' }
         format.json { render :show, status: :ok, location: @submission }
       else

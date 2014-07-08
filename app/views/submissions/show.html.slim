@@ -1,17 +1,58 @@
-p
-  strong Version number:
-  = @submission.version_number
-p
-  strong Feedback:
-  = @submission.feedback
+.row
+  .col-md-12
+    .text-center
+      h1 Assignment Submission: #{@submission.assignment.name}
+      = "Version: #{@submission.version_number}"
+
+br
+- unless @submission.feedback.blank?
+  .row
+    .col-md-12
+      b Feedback: &nbsp;
+      = @submission.feedback
+- else
+  .row
+    .col-md-12
+      b No feedback available yet.
+      br
+      br
 
 - if @submission.document.exists?
-  = link_to "View your submission", @submission.document.url
-- else
+  .row
+    .col-md-12
+      .text-left
+        = link_to "View Submission", @submission.document.url, class: "btn btn-success"
+        br
+        br
+        = link_to "Back to This Assignment", assignment_path(@submission.assignment)
+        br
+        = link_to "Back to All Assignments", user_path(current_user)
+        br
+        br
+
+
+- if current_user.type == :ta
+  .row
+    .col-md-12
+      = form_for @submission do |f|
+        .form-group
+          = f.text_area :feedback, rows: 5, class: "form-control"
+        .form-group
+          = f.select :status, [["Open","Open"],["Resubmit","Resubmit"],["Complete","Complete"]], {selected: "#{@submission.assignment.status}"}, class: "form-control"
+        .text-center
+          = f.submit "Submit", class: "btn btn-primary"
+
+
+br
+br
+
+- unless @submission.document.exists?
   = form_for(@submission) do |f|
     = f.file_field :document
-    = f.submit "Submit", class: "btn btn-primary"
+    br
+      span
+        = f.submit "Upload & Submit", class: "btn btn-primary"
+        = link_to 'Nevermind! Go back!', submissions_path, method: :get, class: "btn btn-danger", style: "margin-left: 50px;"
 
 br
 
-= link_to 'Back', submissions_path 

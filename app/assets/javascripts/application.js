@@ -15,3 +15,29 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-sprockets
+//= require jquery-tablesorter
+
+$(document).ready(function(){
+
+  points = {x: 1, y: 2};
+
+  $("#traveling-salesman-submit").click(function(){
+    $.ajax({
+      url: '/pose_traveling_salesman_problem',
+      type: 'default GET (Other values: POST)',
+      dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+      data: {param1: 'value1'},
+    })
+    .done(function() {
+      console.log("success");
+    })
+    .fail(function() {
+      console.log("error");
+    })
+    .always(function() {
+      console.log("complete");
+    });
+    
+  });
+
+})

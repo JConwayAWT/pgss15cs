@@ -25,17 +25,14 @@ class AssignmentsController < ApplicationController
   # POST /assignments
   # POST /assignments.json
   def create
-    @assignment = Assignment.new(assignment_params)
-
-    respond_to do |format|
-      if @assignment.save
-        format.html { redirect_to @assignment, notice: 'Assignment was successfully created.' }
-        format.json { render :show, status: :created, location: @assignment }
-      else
-        format.html { render :new }
-        format.json { render json: @assignment.errors, status: :unprocessable_entity }
-      end
-    end
+    #begin
+      Assignment.create_assignment_for_all_students(assignment_params)
+      flash[:notice] = "New assignment and submissions were created successfully for all students."
+      redirect_to assignments_path
+    # rescue
+    #   flash[:warning] = "Assignment and submissions could not be created due to a server error..."
+    #   redirect_to new_assignment_path
+    # end
   end
 
   # PATCH/PUT /assignments/1
@@ -69,9 +66,13 @@ class AssignmentsController < ApplicationController
     end
 
     def ensure_permission
-      if current_user.type == :student
+      if !signed_in? or current_user.type == :student
         flash[:alert] = "You do not have permission to take this action on assignments."
-        redirect_to user_path(current_user) and return
+        if signed_in?
+          redirect_to user_path(current_user) and return
+        else
+          redirect_to new_user_session_path
+        end
       end
     end
 

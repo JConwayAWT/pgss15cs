@@ -16,8 +16,8 @@ class User < ActiveRecord::Base
 
   def display_name
     name_string = ""
-    name_string += self.first_name + " "
-    name_string += self.last_name
+    name_string += self.first_name + " " unless self.first_name.blank?
+    name_string += self.last_name unless self.first_name.blank?
     name_string
   end
 end

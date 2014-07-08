@@ -1,17 +1,29 @@
 .row
-  .col-md-10.col-md-offset-1
-    h1 #{@user.display_name}
+  .col-md-6
+    .text-left
+      h1 #{@user.display_name}
 
-    hr
+  .col-md-6
+    .text-right
+      h1 Assignments
 
-.row
-  .col-md-10.col-md-offset-1
-    h2 Assignments
+br
+br
       
-- @user.assignments.each do |assignment|
-  .row
-    .col-md-2.col-md-offset-1 = assignment.name
-    .col-md-2 = assignment.duedate.strftime("%D %H:%M")
-    .col-md-2 = assignment.status
-    .col-md-2 = link_to "Upload", assignment_path(assignment)
+table.table
+  thead
+    tr
+      th Assignment Name
+      th Due Date
+      th Submitted Late?
+      th Status
+      th View
 
+  tbody
+    - @user.assignments.each do |assignment|
+      tr style="background-color:#{assignment.status == "Complete" ? 'rgb(81, 255, 81)' : assignment.status == "Resubmit" ? 'rgb(255, 160, 160)' : ''}"
+        td = assignment.name
+        td = assignment.duedate.strftime("%D %H:%M")
+        td = assignment.submitted_late ? "Yes" : "No"
+        td = assignment.status
+        td = link_to "View", assignment_path(assignment)

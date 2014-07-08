@@ -1,21 +1,38 @@
 .row
   .col-md-10.col-md-offset-1
-    h1.text-center = @assignment.name
+    h1.text-center = @assignment.name + " - Submission Attempts"
 
 .row
   .col-md-5.col-md-offset-1
-    b Due Date: 
-    | #{@assignment.duedate.strftime("%D %H:%M")}
+    h3
+      b Due Date: 
+      | #{@assignment.duedate.strftime("%D %H:%M")}
 
   .col-md-5.text-right
-    b Current status: 
-    | #{@assignment.status}
-p
-  strong Status:
-  = @assignment.status
-p
-  strong Duedate:
-  = @assignment.duedate
-= link_to 'Edit', edit_assignment_path(@assignment)
+    h3
+      b Current status: 
+      | #{@assignment.status}
+
+table.table
+  thead
+    tr
+      th Version Number
+      th Feedback
+      th Submitted File Name
+      th Time Submitted
+      th Download link
+      th View/Upload
+  tbody
+    - @assignment.submissions.sort_by {|subs| subs.version_number} .each do |sub|
+      tr
+        td = sub.version_number.to_s
+        td = sub.feedback.truncate(30, omission: "...")
+        td = sub.document_file_name
+        td = sub.document_updated_at.strftime("%D %H:%M") if sub.document.exists?
+        td = sub.document.exists? ? link_to("Download", sub.document.url) : ""
+        td = sub.not_ready_yet ? "Not yet available..." : link_to("View", submission_path(sub))
+
 br
-= link_to 'Back', assignments_path
+br
+
+= link_to "Back to all assignments", user_path(current_user)
