@@ -21,6 +21,9 @@
         = f.text_field :status, autofocus: true, placeholder: "Status (open)", class: "form-control"
       .form-group
         = f.datetime_select :duedate
+      .form-group
+        = f.check_box :its_class_only
+        label for="assignment_ITS class only" &nbsp; ITS class only
 
       br
 

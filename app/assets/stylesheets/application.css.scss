@@ -24,3 +24,11 @@
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
 }
+
+#body-container{
+  a{
+    &:hover{
+      background-color: transparent;
+    }
+  }
+}

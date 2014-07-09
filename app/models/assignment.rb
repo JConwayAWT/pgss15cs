@@ -2,6 +2,8 @@ class Assignment < ActiveRecord::Base
   belongs_to :user
   has_many :submissions, dependent: :destroy
 
+  attr_accessor :its_class_only
+
   def latest_version
     submissions = self.submissions.sort_by {|subs| subs.version_number}
     submissions.reverse.each do |sub|
@@ -49,8 +51,9 @@ class Assignment < ActiveRecord::Base
     return false
   end
 
-  def self.create_assignment_for_all_students(assignment_params)
+  def self.create_assignment_for_all_students(assignment_params, params)
     User.all.each do |u|
+      next if params[:assignment][:its_class_only] == "1" and u.its_class != true
       if u.type == :student
         a = Assignment.new(assignment_params)
         (1..4).each do |k|

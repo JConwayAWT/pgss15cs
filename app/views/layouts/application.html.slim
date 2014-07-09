@@ -16,6 +16,9 @@ html
             - if current_user.type == :ta
               li
                 = link_to "Assignment List", assignments_path, style: "color:white;"
+            - if current_user.type == :student
+              li 
+                = link_to "My Assignments", user_path(current_user), style: "color: white"
             li
               = link_to "Sign out", destroy_user_session_path, method: :delete, style: "color:white;"
           - else
@@ -34,5 +37,5 @@ html
           .alert.application-alert.text-center
             .alert.alert-danger = alert
 
-    .container
+    .container#body-container
       = yield

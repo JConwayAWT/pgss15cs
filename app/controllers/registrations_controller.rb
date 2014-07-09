@@ -1,6 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   def create
-    if (params[:user][:email].downcase.ends_with?("@andrew.cmu.edu") == false)
+    if (params[:user][:email].downcase.ends_with?("@andrew.cmu.edu") == false and params[:user][:email].downcase.ends_with?("@cmu.edu") == false)
       flash[:alert] = "You must sign up with your @andrew.cmu.edu email address."
       redirect_to new_user_registration_path and return
     end
@@ -13,6 +13,7 @@ class RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
     resource.first_name = params[:user][:first_name]
     resource.last_name = params[:user][:last_name]
+    resource.its_class = true if params[:user][:its_class] == "1"
 
     resource_saved = resource.save
     yield resource if block_given?

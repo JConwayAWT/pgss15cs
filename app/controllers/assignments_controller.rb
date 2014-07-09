@@ -26,13 +26,9 @@ class AssignmentsController < ApplicationController
   # POST /assignments.json
   def create
     #begin
-      Assignment.create_assignment_for_all_students(assignment_params)
+      Assignment.create_assignment_for_all_students(assignment_params, params)
       flash[:notice] = "New assignment and submissions were created successfully for all students."
       redirect_to assignments_path
-    # rescue
-    #   flash[:warning] = "Assignment and submissions could not be created due to a server error..."
-    #   redirect_to new_assignment_path
-    # end
   end
 
   # PATCH/PUT /assignments/1
