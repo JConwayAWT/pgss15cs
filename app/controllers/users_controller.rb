@@ -5,7 +5,11 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    if signed_in?
+      redirect_to after_sign_in_path_for(current_user) and return
+    else
+      @users = User.all
+    end
   end
 
   # GET /users/1
