@@ -1,8 +1,19 @@
+br
+br
+br
+
 .row
   .col-md-12
     .text-center
-      h3 Looks like you need to sign in
+      h3 Looks like you need to sign in or sign up...
 
-      | We're redirecting you now...
+br
+br
 
-meta http-equiv="refresh" content="5; url=users/sign_in"
+.row
+  .col-md-6
+    .text-right
+      = button_to "Sign In", new_user_session_path, method: :get, class: "btn btn-primary", style: "width: 125px;"
+  .col-md-6
+    .text-left
+      = button_to "Sign Up", new_user_registration_path, method: :get, class: "btn btn-success", style: "width: 125px;"

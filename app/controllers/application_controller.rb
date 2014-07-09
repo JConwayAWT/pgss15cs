@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def after_sign_in_path_for(user)
-    user_path(user)
+    if user.type == :student
+      user_path(user)
+    elsif user.type == :ta
+      assignments_path
+    end
   end
 end
