@@ -1,0 +1,38 @@
+.row
+  .col-md-12
+    .text-center
+      h2 Student Reviews
+
+#accordion.panel-group
+  - @students.each_with_index do |student, index|
+    .panel.panel-default
+      .panel-heading
+        h4.panel-title
+          a data-parent="#accordion" data-toggle="collapse" href="#collapse#{index}" 
+            = student.display_name
+      .panel-collapse.collapse
+        .panel-body
+          - student.assignments.each do |assignment|
+            .row
+              .col-md-12
+                h3 = assignment.name
+              table.table
+                thead
+                  tr
+                    th Version
+                    th Feedback
+                    th Rating
+                - assignment.submissions.sort_by {|subs| subs.version_number}.each do |submission|
+                  tbody
+                    tr
+                      td = submission.version_number
+                      td style="font-size: 9px;" = submission.feedback
+                      td = submission.rating
+
+javascript:
+  $(document).ready(function(){
+    $.each($(".panel-collapse"), function(index, value){
+      $(value).attr("id","collapse" + index.toString());
+      index += 1;
+    });
+  });

@@ -86,6 +86,6 @@ class SubmissionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def submission_params
-      params.require(:submission).permit(:version_number, :feedback, :document)
+      params.require(:submission).permit(:version_number, :feedback, :document, :rating)
     end
 end

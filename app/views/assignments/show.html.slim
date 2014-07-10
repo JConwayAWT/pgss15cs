@@ -13,6 +13,14 @@
       b Current status: 
       | #{@assignment.status}
 
+
+- unless @assignment.instructions.blank?
+  .row
+    .col-md-10.col-md-offset-1
+      .alert.alert-danger
+        b Instructions: &nbsp;
+        = @assignment.instructions
+
 table.table
   thead
     tr

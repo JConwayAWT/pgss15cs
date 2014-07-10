@@ -64,6 +64,7 @@ class Assignment < ActiveRecord::Base
           a.submissions << s
         end
         a.status = "Open"
+        a.instructions = params[:assignment][:instructions]
         a.save!
         u.assignments << a
         u.save!

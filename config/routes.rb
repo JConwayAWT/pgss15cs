@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :assignments
 
+  match "/users/student_review", to: "users#student_review", via: :get
   devise_for :users, controllers: {registrations: "registrations"}
   resources :users
 

@@ -57,6 +57,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def student_review
+    if signed_in? and current_user.type == :ta
+      @students = []
+      User.all.each do |u|
+        @students << u if u.type == :student
+      end
+    else
+      flash[:alert] = "You do not have permission to access this page."
+      redirect_to user_path(current_user) and return
+    end
+  end
+
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
