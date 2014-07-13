@@ -1,6 +1,7 @@
 class SubmissionsController < ApplicationController
-  before_action :set_submission, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_permission, only: [:new, :create, :destroy, :Oindex]
+  before_action :set_submission, only: [:show, :edit, :update, :destroy, :delete_attachment]
+  before_action :ensure_permission, only: [:new, :create, :destroy, :index]
+  before_action :ensure_current_user, only: [:delete_attachment]
 
   # GET /submissions
   # GET /submissions.json
@@ -71,6 +72,17 @@ class SubmissionsController < ApplicationController
     end
   end
 
+  def delete_attachment
+    if Time.now < @submission.assignment.duedate
+      @submission.document.destroy
+      flash[:notice] = "The attachment for this submission has been removed successfully."
+      redirect_to submission_path(@submission) and return
+    else
+      flash[:alert] = "You are not allowed to delete an attachment after the due date."
+      redirect_to submission_path(@submission) and return
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_submission
@@ -80,6 +92,13 @@ class SubmissionsController < ApplicationController
     def ensure_permission
       if current_user.type == :student
         flash[:alert] = "You do not have permission to take this action on submissions."
+        redirect_to user_path(current_user) and return
+      end
+    end
+
+    def ensure_current_user
+      unless (signed_in? and current_user.id == @submission.assignment.user.id)
+        flash[:alert] = "You can only take this action if you are the owner of the submission."
         redirect_to user_path(current_user) and return
       end
     end

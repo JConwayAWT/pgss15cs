@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :submissions
 
+  match "submissions/:id/delete_attachment", to: "submissions#delete_attachment", via: :post
+  resources :submissions
   resources :assignments
 
   match "/users/student_review", to: "users#student_review", via: :get

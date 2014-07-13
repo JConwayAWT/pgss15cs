@@ -32,6 +32,17 @@ br
       .text-left
         = button_to "View Submission", @submission.document.url, method: :get, class: "btn btn-success"
         br
+  - if Time.now < @submission.assignment.duedate
+    .row
+      .col-md-12
+        .text-left
+          = button_to "Delete Submission", "/submissions/#{@submission.id}/delete_attachment", method: :post, class: "btn btn-danger"
+
+- if @submission.document.exists?
+  .row
+    .col-md-12
+      .text-left
+        br
         br
         = link_to "Back to This Assignment", assignment_path(@submission.assignment)
         br
