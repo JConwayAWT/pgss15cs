@@ -48,6 +48,13 @@ class SubmissionsController < ApplicationController
       redirect_to submission_path(@submission) and return
     end
 
+    if params[:submission][:document] and params[:submission][:document].original_filename.downcase.ends_with?(".class")
+      errors = ["<div align='center'><b>PLEASE READ:</b></div></br>Your submission was rejected because the file extension was '.class,' which means you submitted the compiled code (which only a computer can interpret).",
+      "Please submit your file with the extension '.java,' which is the human-readable source code that you wrote.  Thanks!"]
+      flash[:alert] = errors.join("</br></br>")
+      redirect_to submission_path(@submission) and return
+    end
+
     respond_to do |format|
       if @submission.update(submission_params)
         a = @submission.assignment
@@ -105,6 +112,6 @@ class SubmissionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def submission_params
-      params.require(:submission).permit(:version_number, :feedback, :document, :rating)
+      params.require(:submission).permit(:version_number, :feedback, :document, :rating, :private_feedback)
     end
 end

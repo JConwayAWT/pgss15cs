@@ -20,13 +20,15 @@
                 thead
                   tr
                     th Version
-                    th Feedback
+                    th Student Feedback
+                    th Private Feedback
                     th Rating
                 - assignment.submissions.sort_by {|subs| subs.version_number}.each do |submission|
                   tbody
                     tr
                       td = submission.version_number
                       td style="font-size: 9px;" = submission.feedback
+                      td style="font-size: 9px;" = submission.private_feedback
                       td = submission.rating
 
 javascript:

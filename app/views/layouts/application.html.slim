@@ -37,7 +37,7 @@ html
       .row
         .col-md-6.col-md-offset-3
           .alert.application-alert.text-center
-            .alert.alert-danger = alert
+            .alert.alert-danger = alert.html_safe
 
     .container#body-container
       = yield
