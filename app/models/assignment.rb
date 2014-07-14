@@ -3,6 +3,7 @@ class Assignment < ActiveRecord::Base
   has_many :submissions, dependent: :destroy
 
   attr_accessor :its_class_only
+  attr_accessor :advanced_section_only
 
   def latest_version
     submissions = self.submissions.sort_by {|subs| subs.version_number}
@@ -54,6 +55,7 @@ class Assignment < ActiveRecord::Base
   def self.create_assignment_for_all_students(assignment_params, params)
     User.all.each do |u|
       next if params[:assignment][:its_class_only] == "1" and u.its_class != true
+      next if params[:assignment][:advanced_section_only] == "1" and u.cs_advanced_section != true
       if u.type == :student
         a = Assignment.new(assignment_params)
         (1..4).each do |k|
