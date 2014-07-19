@@ -56,6 +56,7 @@ class Assignment < ActiveRecord::Base
     User.all.each do |u|
       next if params[:assignment][:its_class_only] == "1" and u.its_class != true
       next if params[:assignment][:advanced_section_only] == "1" and u.cs_advanced_section != true
+      next if params[:assignment][:its_class_only] == "0" and params[:assignment][:advanced_section_only] == "0" and u.cs_advanced_section == true
       if u.type == :student
         a = Assignment.new(assignment_params)
         (1..4).each do |k|
