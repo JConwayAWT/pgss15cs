@@ -21,7 +21,7 @@ table.table
 
   tbody
     - @user.assignments.each do |assignment|
-      tr style="background-color:#{assignment.status == "Complete" ? 'rgb(81, 255, 81)' : assignment.status == "Resubmit" ? 'rgb(255, 160, 160)' : ''}"
+      tr style="background-color:#{assignment.status == "Complete" ? 'rgb(192, 255, 192)' : assignment.status == "Resubmit" ? 'rgb(255, 200, 200)' : ''}"
         td = assignment.name
         td = assignment.duedate.strftime("%D %H:%M")
         td = assignment.submitted_late ? "Yes" : "No"
