@@ -12,6 +12,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def list
+    if signed_in? and current_user.type == :ta
+      @students = []
+      User.all.each do |u|
+        @students << u if u.type != :ta
+      end
+      @students = @students.sort_by {|s| s.last_name}
+    else
+      flash[:alert] = "You do not have permission to access this page."
+      redirect_to user_path(current_user) and return
+    end
+  end
+
   # GET /users/1
   # GET /users/1.json
   def show
@@ -80,7 +93,7 @@ class UsersController < ApplicationController
   end
 
   def ensure_current_user
-    if params[:id].to_i != current_user.id
+    if params[:id].to_i != current_user.id and current_user.type != :ta
       flash[:alert] = "You do not have permission to perform this action on other users."
       redirect_to user_path(current_user) and return
     end
