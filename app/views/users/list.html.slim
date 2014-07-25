@@ -1,0 +1,15 @@
+br
+br
+.row
+  .col-md-12
+    .text-center
+      h2 Student List
+
+- @students.each do |student|
+  .row
+    .col-md-6
+      .text-right
+        = student.display_name
+    .col-md-6
+      .text-left 
+        = link_to "View", user_path(student)
