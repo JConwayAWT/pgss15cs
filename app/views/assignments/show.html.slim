@@ -19,7 +19,7 @@
     .col-md-10.col-md-offset-1
       .alert.alert-danger
         b Instructions: &nbsp;
-        = @assignment.instructions
+        = @assignment.instructions.html_safe
 
 table.table
   thead
