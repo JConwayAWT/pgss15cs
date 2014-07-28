@@ -16,6 +16,8 @@ html
           - if signed_in?
             - if current_user.type == :ta
               li
+                = link_to "Search", "/assignments/search_by_name", style: "color:white;"
+              li
                 = link_to "Student List", "/users/list", style: "color:white;"
               li
                 = link_to "Student Reviews", "/users/student_review", style: "color:white;"

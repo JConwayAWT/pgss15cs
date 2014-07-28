@@ -4,6 +4,7 @@ class Assignment < ActiveRecord::Base
 
   attr_accessor :its_class_only
   attr_accessor :advanced_section_only
+  attr_accessor :name_search_parameter
 
   def latest_version
     submissions = self.submissions.sort_by {|subs| subs.version_number}

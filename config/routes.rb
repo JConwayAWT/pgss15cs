@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  match "/assignments/search_by_name", to: "assignments#search_by_name", via: :get
+  match "/assignments/name_results", to: "assignments#name_results", via: :post
+
   match "submissions/:id/delete_attachment", to: "submissions#delete_attachment", via: :post
   resources :submissions
   resources :assignments

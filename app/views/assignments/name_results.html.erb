@@ -1,0 +1,44 @@
+<h1 align="center">Assignment Index</h1>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="text-right">
+      <%= button_to 'New Assignment', new_assignment_path, method: :get, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</p>
+
+<table class="table" id="assignments_table">
+  <thead>
+    <tr style="cursor:pointer;">
+      <th data-placeholder="Ex: Jamie">Student</th>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Due Date</th>
+      <th>Needs Review?</th>
+      <th>Download Latest</th>
+      <th>View Latest</th>
+      <th>Show</th>
+      <th>Late?</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assignments.each do |assignment| %>
+      <tr style="background-color:<%= assignment.status == "Complete" ? 'rgb(81, 255, 81)' : assignment.status == "Resubmit" ? 'rgb(255, 160, 160)' : ''%>">
+        <td><%= assignment.user.display_name %></td>
+        <td><%= assignment.name %></td>
+        <td><%= assignment.status %></td>
+        <td><%= assignment.duedate.strftime("%D %H:%M") %></td>
+        <td><%= assignment.needs_review? ? "Yes" : "No" %></td>
+        <td><%= link_to "Download", assignment.latest_version_download_link if assignment.has_some_submission %></td>
+        <td><%= link_to "Latest", submission_path(assignment.latest_version) if assignment.has_some_submission %></td>
+        <td><%= link_to 'Show', assignment %></td>
+        <td><%= assignment.submitted_late ? 'Yes' : "No" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

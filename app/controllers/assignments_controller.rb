@@ -8,6 +8,13 @@ class AssignmentsController < ApplicationController
     @assignments = Assignment.where('status != ?', "Complete")
   end
 
+  def search_by_name
+    if not (signed_in? and current_user.type == :ta)
+      flash[:alert] == "You do not have permission to access this page."
+      redirect_to root_path
+    end
+  end
+
   # GET /assignments/1
   # GET /assignments/1.json
   def show
@@ -53,6 +60,11 @@ class AssignmentsController < ApplicationController
       format.html { redirect_to assignments_url, notice: 'Assignment was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def name_results
+    name = params[:Name]
+    @assignments = Assignment.where(name: name)
   end
 
   private
