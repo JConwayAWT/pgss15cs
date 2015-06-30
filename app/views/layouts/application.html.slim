@@ -6,7 +6,7 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   / body style=('background-color: lime' if (signed_in? and (current_user.id == 18 or current_user.id == 23)))
-  body style="#{signed_in? and (current_user.id == 18 or current_user.id == 23 or current_user.id == 5) ? 'background-color: lime; color: yellow' : '' }"
+  body
     nav.navbar.navbar-inverse#no-border-radius role="navigation"
       .container-fluid
         .navbar-header
