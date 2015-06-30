@@ -2,7 +2,7 @@ class Assignment < ActiveRecord::Base
   belongs_to :user
   has_many :submissions, dependent: :destroy
 
-  attr_accessor :its_class_only
+  attr_accessor :advanced_lab_only
   attr_accessor :advanced_section_only
   attr_accessor :name_search_parameter
 
@@ -55,9 +55,9 @@ class Assignment < ActiveRecord::Base
 
   def self.create_assignment_for_all_students(assignment_params, params)
     User.all.each do |u|
-      next if params[:assignment][:its_class_only] == "1" and u.its_class != true
+      next if params[:assignment][:advanced_lab_only] == "1" and u.advanced_lab != true
       next if params[:assignment][:advanced_section_only] == "1" and u.cs_advanced_section != true
-      next if params[:assignment][:its_class_only] == "0" and params[:assignment][:advanced_section_only] == "0" and u.cs_advanced_section == true
+      next if params[:assignment][:advanced_lab_only] == "0" and params[:assignment][:advanced_section_only] == "0" and u.cs_advanced_section == true
       if u.type == :student
         a = Assignment.new(assignment_params)
         (1..4).each do |k|
