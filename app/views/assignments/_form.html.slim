@@ -10,6 +10,8 @@
       .form-group
         = f.text_area :instructions, placeholder: "Instructions", rows: 5, class: "form-control"
       .form-group
+        = f.file_field :document
+      .form-group
         = f.text_field :status, value: "Open", class: "form-control"
       .form-group
         = f.datetime_select :duedate

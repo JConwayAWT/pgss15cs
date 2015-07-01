@@ -21,6 +21,13 @@
         b Instructions: &nbsp;
         = @assignment.instructions.html_safe
 
+- if @assignment.document.exists?
+  .row
+    .col-md-10.col-md-offset-1
+      .alert.alert-info
+        b Attached file: &nbsp;
+        = link_to "Download", @assignment.document.url
+
 table.table
   thead
     tr

@@ -2,9 +2,14 @@ class Assignment < ActiveRecord::Base
   belongs_to :user
   has_many :submissions, dependent: :destroy
 
+  has_attached_file :document,
+    path: "assignments/:id/:filename"
+
   attr_accessor :advanced_lab_only
   attr_accessor :advanced_section_only
   attr_accessor :name_search_parameter
+
+  do_not_validate_attachment_file_type :document
 
   def latest_version
     submissions = self.submissions.sort_by {|subs| subs.version_number}
@@ -69,6 +74,8 @@ class Assignment < ActiveRecord::Base
         end
         a.status = "Open"
         a.instructions = params[:assignment][:instructions]
+        a.document = params[:assignment][:document]
+        # debugger
         a.save!
         u.assignments << a
         u.save!
@@ -76,4 +83,13 @@ class Assignment < ActiveRecord::Base
     end
   end
 
+end
+
+require 'paperclip/media_type_spoof_detector'
+module Paperclip
+  class MediaTypeSpoofDetector
+    def spoofed?
+      false
+    end
+  end
 end
