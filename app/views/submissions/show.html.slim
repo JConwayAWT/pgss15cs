@@ -77,10 +77,17 @@ br
     = form_for(@submission) do |f|
       .row
         .col-md-12
-          = f.file_field :document
+          = f.file_field :document, id: "file-button"
       br
       .row
         .col-md-2
-          = f.submit "Upload & Submit", class: "btn btn-primary"
+          = f.submit "Upload & Submit", class: "btn btn-primary", id: "submit-button", disabled: true
         .col-md-2
           = button_to 'Nevermind! Go back!', assignment_path(@submission.assignment), class: "btn btn-danger"
+
+javascript:
+  $(document).ready(function(){
+    $("#file-button").change(function(){
+      $("#submit-button").removeAttr("disabled");
+    })
+  })
