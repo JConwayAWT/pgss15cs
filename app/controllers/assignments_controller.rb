@@ -87,7 +87,6 @@ class AssignmentsController < ApplicationController
       s.save!
       a.submissions << s
     end
-    debugger
     a.status = "Open"
     a.save!
     u.assignments << a
