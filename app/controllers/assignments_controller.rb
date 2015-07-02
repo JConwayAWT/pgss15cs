@@ -67,6 +67,35 @@ class AssignmentsController < ApplicationController
     @assignments = Assignment.where(name: name)
   end
 
+  def new_single_assignment_get
+    @assignment = Assignment.new
+    @students = User.where(user_type: nil).sort_by{ |u| u.last_name }
+    @student_options = []
+    @students.each do |s|
+      @student_options << [s.display_name, s.id]
+    end
+  end
+
+  def new_single_assignment_create
+    u = User.find_by_id(params[:assignment][:student])
+
+    a = Assignment.new(assignment_params)
+    (1..4).each do |k|
+      s= Submission.new()
+      s.version_number = k
+      s.feedback = ""
+      s.save!
+      a.submissions << s
+    end
+    debugger
+    a.status = "Open"
+    a.save!
+    u.assignments << a
+    u.save!
+
+    redirect_to assignments_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_assignment
@@ -86,6 +115,6 @@ class AssignmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def assignment_params
-      params.require(:assignment).permit(:name, :status, :duedate, :document)
+      params.require(:assignment).permit(:name, :status, :duedate, :document, :instructions)
     end
 end

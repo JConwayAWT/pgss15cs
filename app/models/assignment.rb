@@ -8,6 +8,7 @@ class Assignment < ActiveRecord::Base
   attr_accessor :advanced_lab_only
   attr_accessor :advanced_section_only
   attr_accessor :name_search_parameter
+  attr_accessor :student
 
   do_not_validate_attachment_file_type :document
 
