@@ -1,6 +1,7 @@
 class AssignmentsController < ApplicationController
   before_action :set_assignment, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_permission, only: [:new, :create, :edit, :update, :destroy, :index]
+  before_action :ensure_permission, only: [:new, :create, :edit, :update, :destroy, :index, 
+                                            :new_single_assignment_get, :new_single_assignment_create]
 
   # GET /assignments
   # GET /assignments.json

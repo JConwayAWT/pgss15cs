@@ -1,0 +1,36 @@
+// local variable (last submission) is @submission
+a href="#" data-toggle="modal" data-target="#modal-submission-#{subm.id}" Grade
+
+<div class="modal fade" id="modal-submission-#{subm.id}">
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close aria-label="Close" data-dismiss="modal" type="button" 
+          span aria-hidden="true"  &times;
+        h4.modal-title Grade Submission
+      .modal-body
+        .row
+          .col-md-10.col-md-offset-1
+            = form_for(subm, remote: true) do |f|
+              .form-group
+                label.label style="color:black" Student-directed (public) feedback
+                = f.text_area :feedback, rows: 3, class: "form-control", placeholder: "PUBLIC FEEDBACK: The students WILL see this text!"
+              .form-group
+                label.label style="color:black" Private feedback
+                = f.text_area :private_feedback, rows: 3, class: "form-control", placeholder: "PRIVATE FEEDBACK: The students will NOT see this text."
+              .form-group
+                = f.select :rating, [["Excellent","Excellent"],["Very good","Very good"],["Good","Good"],["Proficient","Proficient"],["Resubmit","Resubmit"]], {selected: "Good"}, class: "form-control"
+              .form-group
+                = f.select :status, [["Open","Open"],["Resubmit","Resubmit"],["Complete","Complete"]], {selected: "#{subm.assignment.status}"}, class: "form-control"
+              .text-center
+                = f.submit "Submit", class: "btn btn-primary submit-button", id: "modal-submit-button-#{subm.id}"
+      .modal-footer
+        button.btn.btn-default data-dismiss="modal" type="button"  Close
+
+javascript:
+  $(document).ready(function(){
+    $(".submit-button").click(function(){
+      id = $(this).attr("id")
+      $("#" + id).closest(".modal").modal("hide");
+    })
+  })

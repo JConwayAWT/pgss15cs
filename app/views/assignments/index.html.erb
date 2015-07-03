@@ -23,6 +23,7 @@
       <th>Status</th>
       <th>Due Date</th>
       <th>Needs Review?</th>
+      <th>Grade Latest</th>
       <th>Download Latest</th>
       <th>View Latest</th>
       <th>Show</th>
@@ -41,6 +42,11 @@
         <td><%= assignment.status %></td>
         <td><%= assignment.duedate.strftime("%D %H:%M") %></td>
         <td><%= assignment.needs_review? ? "Yes" : "No" %></td>
+        <% if assignment.has_some_submission %>
+          <td><%= render partial: "grade_current", locals: {subm: assignment.latest_version} %></td>
+        <% else %>
+          <td></td>
+        <% end %>
         <td><%= link_to "Download", assignment.latest_version_download_link if assignment.has_some_submission %></td>
         <td><%= link_to "Latest", submission_path(assignment.latest_version) if assignment.has_some_submission %></td>
         <td><%= link_to 'Show', assignment %></td>
