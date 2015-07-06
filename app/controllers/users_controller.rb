@@ -76,6 +76,7 @@ class UsersController < ApplicationController
       User.all.each do |u|
         @students << u if u.type == :student
       end
+      @students.sort_by!{|u| u.last_name}
     else
       flash[:alert] = "You do not have permission to access this page."
       redirect_to user_path(current_user) and return

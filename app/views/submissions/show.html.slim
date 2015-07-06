@@ -62,7 +62,7 @@ br
           label.label style="color:black" Private feedback
           = f.text_area :private_feedback, rows: 3, class: "form-control", placeholder: "PRIVATE FEEDBACK: The students will NOT see this text."
         .form-group
-          = f.select :rating, [["Excellent","Excellent"],["Very good","Very good"],["Good","Good"],["Proficient","Proficient"],["Resubmit","Resubmit"]], {selected: "Good"}, class: "form-control"
+          = f.select :rating, [["Excellent","Excellent"],["Very good","Very good"],["Good","Good"],["Proficient","Proficient"],["Resubmit","Resubmit"]], {selected: "#{@submission.rating}"}, class: "form-control"
         .form-group
           = f.select :status, [["Open","Open"],["Resubmit","Resubmit"],["Complete","Complete"]], {selected: "#{@submission.assignment.status}"}, class: "form-control"
         .text-center
