@@ -45,7 +45,7 @@ table.table
         td = sub.document_file_name
         td = sub.document_updated_at.strftime("%D %H:%M") if sub.document.exists?
         td = sub.document.exists? ? link_to("Download", sub.document.url) : ""
-        td = sub.not_ready_yet ? "Not yet available..." : link_to("View", submission_path(sub))
+        td = sub.not_ready_yet ? "Not yet available..." : button_to("VIEW / UPLOAD", submission_path(sub), method: :get, class: "btn btn-primary", style: "font-size: 7pt")
 
 br
 br

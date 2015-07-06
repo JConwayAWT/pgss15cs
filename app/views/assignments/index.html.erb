@@ -49,7 +49,7 @@
         <% end %>
         <td><%= link_to "Download", assignment.latest_version_download_link if assignment.has_some_submission %></td>
         <td><%= link_to "Latest", submission_path(assignment.latest_version) if assignment.has_some_submission %></td>
-        <td><%= link_to 'Show', assignment %></td>
+        <td><%= button_to 'VIEW', assignment_path(assignment), method: :get, class: "btn btn-primary", style: "font-size: 7pt" %></td>
         <td><%= assignment.submitted_late ? 'Yes' : "No" %></td>
       </tr>
     <% end %>
