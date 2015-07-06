@@ -26,4 +26,4 @@ table.table
         td = assignment.duedate.strftime("%D %H:%M")
         td = assignment.submitted_late ? "Yes" : "No"
         td = assignment.status
-        td = link_to "View", assignment_path(assignment)
+        td = button_to "VIEW", assignment_path(assignment), method: :get, class: "btn btn-primary", style: "font-size: 7pt"
