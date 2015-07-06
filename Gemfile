@@ -44,5 +44,5 @@ gem 'aws-sdk', '~> 1.5.7'
 # gem 'capistrano-rails', group: :development
 
 # Use debugger
-gem 'debugger', group: [:development, :test]
+gem 'byebug', group: [:development, :test]
 
