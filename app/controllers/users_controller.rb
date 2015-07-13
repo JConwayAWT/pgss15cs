@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_current_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -59,15 +58,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
+
   end
 
   def student_review
@@ -90,13 +81,6 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
-    end
-  end
-
-  def ensure_current_user
-    if params[:id].to_i != current_user.id and current_user.type != :ta
-      flash[:alert] = "You do not have permission to perform this action on other users."
-      redirect_to user_path(current_user) and return
     end
   end
 
