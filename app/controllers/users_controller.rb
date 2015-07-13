@@ -71,7 +71,7 @@ class UsersController < ApplicationController
   def user_info
     @user = User.find(params[:id])
     respond_to do |format|
-      format.html { render :index }
+      format.html { redirect_to users_path }
       format.json { render json: @user }
     end 
   end
@@ -107,7 +107,7 @@ class UsersController < ApplicationController
         redirect_to user_path(current_user) and return
       end
     end
-    
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
