@@ -1,6 +1,36 @@
-<h1>Editing user</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1 class="text-center">
+      <b>Edit Profile</b>
+    </h1>
+  </div>
+</div>
 
-<%= render 'form' %>
+<br>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <%= form_for @user do |f| %>
+      <div class="form-group">
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name, class: "form-control", placeholder: "First name", autofocus: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, class: "form-control", placeholder: "Last name" %>
+      </div>
+      <div class="form-group">
+        <%= f.check_box :advanced_lab %>
+        &nbsp; I would like to submit work for additional CS lab assignments
+      </div>
+      <div class="form-group">
+        <%= f.check_box :cs_advanced_section %>
+        &nbsp; I would like to be in the alternative section of the core CS course
+      </div>
+
+      <div class="text-center">
+        <%= f.submit "Submit Changes", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
