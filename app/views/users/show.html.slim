@@ -17,6 +17,7 @@ table.table
       th Due Date
       th Submitted Late?
       th Status
+      th Feedback
       th View
 
   tbody
@@ -26,4 +27,9 @@ table.table
         td = assignment.duedate.strftime("%D %H:%M")
         td = assignment.submitted_late ? "Yes" : "No"
         td = assignment.status
+        - if assignment.status == "Complete" or assignment.status == "Resubmit"
+          td = button_to "VIEW FEEDBACK", submission_path(assignment.latest_version), method: :get, class: "btn btn-primary", style: "font-size: 7pt"
+        - else
+          td
+            i Not Available
         td = button_to "VIEW", assignment_path(assignment), method: :get, class: "btn btn-primary", style: "font-size: 7pt"
