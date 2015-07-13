@@ -68,14 +68,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def user_info
-    @user = User.find(params[:id])
-    respond_to do |format|
-      format.html { redirect_to users_path }
-      format.json { render json: @user }
-    end 
-  end
-
   def student_review
     if signed_in? and current_user.type == :ta
       @students = []

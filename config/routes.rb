@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   match "/assignments/name_results", to: "assignments#name_results", via: :post
   match "/assignments/new_single", to: "assignments#new_single_assignment_get", via: :get
   match "/assignments/new_single_create", to: "assignments#new_single_assignment_create", via: :post
-  match "/users/:id/info", to: "users#user_info", via: :get
 
   match "submissions/:id/delete_attachment", to: "submissions#delete_attachment", via: :post
   resources :submissions
