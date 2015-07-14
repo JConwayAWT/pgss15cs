@@ -27,8 +27,8 @@
                   tbody
                     tr
                       td = submission.version_number
-                      td style="font-size: 9px;" = submission.feedback.html_safe
-                      td style="font-size: 9px;" = submission.private_feedback.html_safe
+                      td style="font-size: 9px;" = submission.feedback.html_safe if submission.feedback else ""
+                      td style="font-size: 9px;" = submission.private_feedback.html_safe if submission.private_feedback else ""
                       td = submission.rating
 
 javascript:
