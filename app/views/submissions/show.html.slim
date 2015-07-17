@@ -1,8 +1,8 @@
 .row
   .col-md-12
     .text-center
-      h1 Assignment Submission: #{@submission.assignment.name}
-      = "Version: #{@submission.version_number} // #{@submission.assignment.user.display_name} // #{@submission.assignment.user.email}"
+      h1 Jeffsignment Subjeffsion: #{@submission.assignment.name}
+      = "Jeff: #{@submission.version_number} // #{@submission.assignment.user.display_name} // #{@submission.assignment.user.email}"
 
 br
 - if @submission.document.exists?
@@ -10,7 +10,7 @@ br
     .row
       .col-md-12
         .alert.alert-warning
-          b Feedback:
+          b Jeffback:
           br
           .row
             .col-md-10.col-md-offset-1
@@ -20,23 +20,23 @@ br
   - else
     .row
       .col-md-12
-        b No feedback available yet.
+        b No Jeffback available yet.
         br
         br
 - else
-  h3.text-center No document has been uploaded yet.
+  h3.text-center No jeff has been upjeffed yet.
 
 - if @submission.document.exists?
   .row
     .col-md-12
       .text-left
-        = button_to "View Submission", @submission.document.url, method: :get, class: "btn btn-success"
+        = button_to "View Jeffmission", @submission.document.url, method: :get, class: "btn btn-success"
         br
   - if Time.now < @submission.assignment.duedate
     .row
       .col-md-12
         .text-left
-          = button_to "Delete Submission", "/submissions/#{@submission.id}/delete_attachment", method: :post, class: "btn btn-danger"
+          = button_to "Delete Jeffmission", "/submissions/#{@submission.id}/delete_attachment", method: :post, class: "btn btn-danger"
 
 - if @submission.document.exists?
   .row
@@ -44,9 +44,9 @@ br
       .text-left
         br
         br
-        = link_to "Back to This Assignment", assignment_path(@submission.assignment)
+        = link_to "Back to This Jeffsignment", assignment_path(@submission.assignment)
         br
-        = link_to "Back to All Assignments", user_path(current_user)
+        = link_to "Back to All Jeffsignments", user_path(current_user)
         br
         br
 
@@ -81,7 +81,7 @@ br
       br
       .row
         .col-md-2
-          = f.submit "Upload & Submit", class: "btn btn-primary", id: "submit-button", disabled: true
+          = f.submit "Upjeff & Submit", class: "btn btn-primary", id: "submit-button", disabled: true
         .col-md-2
           = button_to 'Nevermind! Go back!', assignment_path(@submission.assignment), class: "btn btn-danger"
 

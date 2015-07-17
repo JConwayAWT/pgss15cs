@@ -1,16 +1,16 @@
 .row
   .col-md-10.col-md-offset-1
-    h1.text-center = @assignment.name + " - Submission Attempts"
+    h1.text-center = @assignment.name + " - Jeffmission Attempts"
 
 .row
   .col-md-5.col-md-offset-1
     h3
-      b Due Date: 
+      b Jeff Date: 
       | #{@assignment.duedate.strftime("%D %H:%M")}
 
   .col-md-5.text-right
     h3
-      b Current status: 
+      b Current Jeffus: 
       | #{@assignment.status}
 
 
@@ -18,25 +18,25 @@
   .row
     .col-md-10.col-md-offset-1
       .alert.alert-danger
-        b Instructions: &nbsp;
+        b Jeffstructions: &nbsp;
         = @assignment.instructions.html_safe
 
 - if @assignment.document.exists?
   .row
     .col-md-10.col-md-offset-1
       .alert.alert-info
-        b Attached file: &nbsp;
+        b Attached jeff: &nbsp;
         = link_to "Download", @assignment.document.url
 
 table.table
   thead
     tr
-      th Version Number
-      th Feedback
-      th Submitted File Name
-      th Time Submitted
-      th Download link
-      th View/Upload
+      th Jeff Number
+      th Jeffback
+      th Jeffed File Name
+      th Time Jeffed
+      th Downjeff
+      th View/Upjeff
   tbody
     - @assignment.submissions.sort_by {|subs| subs.version_number} .each do |sub|
       tr
@@ -44,8 +44,8 @@ table.table
         td = sub.feedback.truncate(30, omission: "...")
         td = sub.document_file_name
         td = sub.document_updated_at.strftime("%D %H:%M") if sub.document.exists?
-        td = sub.document.exists? ? link_to("Download", sub.document.url) : ""
-        td = sub.not_ready_yet ? "Not yet available..." : button_to("VIEW / UPLOAD", submission_path(sub), method: :get, class: "btn btn-primary", style: "font-size: 7pt")
+        td = sub.document.exists? ? link_to("Downjef", sub.document.url) : ""
+        td = sub.not_ready_yet ? "Not yet available..." : button_to("VIEW / UPJEFF", submission_path(sub), method: :get, class: "btn btn-primary", style: "font-size: 7pt")
 
 br
 br
