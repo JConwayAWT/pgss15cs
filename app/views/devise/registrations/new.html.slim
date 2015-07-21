@@ -1,34 +1,34 @@
 .row
   .col-md-6.col-md-offset-3
     .text-center
-      h2 Jeff up
+      h2 Sign up
 
 .row
   .col-md-6.col-md-offset-3
     = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
 
       .form-group
-        = f.email_field :email, autofocus: true, class: "form-control", placeholder: "jeff@jeff.com"
+        = f.email_field :email, autofocus: true, class: "form-control", placeholder: "Your most frequently checked email address"
 
       .form-group
-        = f.text_field :first_name, class: "form-control", placeholder: "Jeff"
+        = f.text_field :first_name, class: "form-control", placeholder: "First name"
 
       .form-group
-        = f.text_field :last_name, class: "form-control", placeholder: "Conway"
+        = f.text_field :last_name, class: "form-control", placeholder: "Last name"
 
       .form-group
-        = f.password_field :password, class: "form-control", placeholder: "Jeffspassword"
+        = f.password_field :password, class: "form-control", placeholder: "Password"
 
       .form-group
-        = f.password_field :password_confirmation, class: "form-control", placeholder: "Jeffspasswordconfirmation"
+        = f.password_field :password_confirmation, class: "form-control", placeholder: "Password confirmation"
 
       .form-group
         = f.check_box :advanced_lab
-        label for="user_I would like to submit work for additional CS lab assignments" &nbsp; Additional Jeff lab
+        label for="user_I would like to submit work for additional CS lab assignments" &nbsp; I would like to submit work for additional CS lab assignments
 
       .form-group
         = f.check_box :cs_advanced_section
-        label for="user_advanced_section" &nbsp; Advanced JeffS
+        label for="user_advanced_section" &nbsp; I would like to be in the advanced section of the core computer science course
 
       .text-center
-        = f.submit "Jeff up", class: "btn btn-primary"
+        = f.submit "Sign up", class: "btn btn-primary"

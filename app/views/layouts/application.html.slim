@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title JEFFSAPP
+    title PGSS '15 CS
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
     = csrf_meta_tags
@@ -10,7 +10,7 @@ html
     nav.navbar.navbar-inverse#no-border-radius role="navigation"
       .container-fluid
         .navbar-header
-          .navbar-brand JEFFSAPP
+          .navbar-brand PGSS '15 CS
 
         ul.nav.navbar-nav.navbar-right
           - if signed_in?
@@ -25,14 +25,14 @@ html
                 = link_to "Assignment List", assignments_path, style: "color:white;"
             - if current_user.type == :student
               li 
-                = link_to "Edit Jeffile", edit_user_path(current_user), style: "color: white"
+                = link_to "Edit Profile", edit_user_path(current_user), style: "color: white"
               li 
-                = link_to "Jeffsassignments", user_path(current_user), style: "color: white"
+                = link_to "Assignments", user_path(current_user), style: "color: white"
             li
-              = link_to "Jeff out", destroy_user_session_path, method: :delete, style: "color:white;"
+              = link_to "Sign out", destroy_user_session_path, method: :delete, style: "color:white;"
           - else
             li
-              = link_to "Jeff in", new_user_session_path, style: "color:white;"
+              = link_to "Sign in", new_user_session_path, style: "color:white;"
 
     - if notice
       .row
