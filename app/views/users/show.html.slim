@@ -5,7 +5,7 @@
 
   .col-md-6
     .text-right
-      h1 Assignments
+      h1 Jeffsignments
 
 br
 br
@@ -13,12 +13,12 @@ br
 table.table
   thead
     tr
-      th Assignment Name
-      th Due Date
-      th Submitted Late?
-      th Status
-      th Feedback
-      th View
+      th Assignment Jeff
+      th Due Jeff
+      th Jeffed Late?
+      th Jeffus
+      th Jeffback
+      th Jeffsview
 
   tbody
     - @user.assignments.each do |assignment|
@@ -28,8 +28,8 @@ table.table
         td = assignment.submitted_late ? "Yes" : "No"
         td = assignment.status
         - if assignment.status == "Complete" or assignment.status == "Resubmit"
-          td = button_to "VIEW FEEDBACK", submission_path(assignment.latest_version), method: :get, class: "btn btn-primary", style: "font-size: 7pt"
+          td = button_to "VIEW JEFFBACK", submission_path(assignment.latest_version), method: :get, class: "btn btn-primary", style: "font-size: 7pt"
         - else
           td
             i Not Available
-        td = button_to "VIEW", assignment_path(assignment), method: :get, class: "btn btn-primary", style: "font-size: 7pt"
+        td = button_to "JEFFSVIEW", assignment_path(assignment), method: :get, class: "btn btn-primary", style: "font-size: 7pt"
