@@ -1,7 +1,7 @@
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy, :delete_attachment]
   before_action :ensure_permission, only: [:new, :create, :destroy, :index]
-  before_action :ensure_current_user, only: [:delete_attachment]
+  before_action :ensure_current_user, only: [:delete_attachment, :show, :edit, :update, :destroy]
 
   # GET /submissions
   # GET /submissions.json
