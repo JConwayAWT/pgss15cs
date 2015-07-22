@@ -20,6 +20,7 @@
       <% end %>
       <th data-placeholder="Ex: Jamie">Student</th>
       <th>Name</th>
+      <th>Email</th>
       <th>Status</th>
       <th>Due Date</th>
       <th>Needs Review?</th>
@@ -38,6 +39,7 @@
           <td><%= button_to "DELETE", assignment_path(assignment), method: :delete, class: "btn btn-danger", style: "font-size: 6pt", data: {confirm: "Are you sure?"} %></td>
         <% end %>
         <td><%= assignment.user.display_name %></td>
+        <td><%= assignment.user.email %></td>
         <td><%= assignment.name %></td>
         <td><%= assignment.status %></td>
         <td><%= assignment.duedate.strftime("%D %H:%M") %></td>
