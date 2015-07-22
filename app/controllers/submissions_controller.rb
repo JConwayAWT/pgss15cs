@@ -1,7 +1,7 @@
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy, :delete_attachment]
   before_action :ensure_permission, only: [:new, :create, :destroy, :index]
-  before_action :ensure_current_user, only: [:delete_attachment]
+  before_action :ensure_current_user, only: [:delete_attachment, :show, :edit, :update, :destroy]
 
   # GET /submissions
   # GET /submissions.json
@@ -104,7 +104,7 @@ class SubmissionsController < ApplicationController
     end
 
     def ensure_current_user
-      unless (signed_in? and current_user.id == @submission.assignment.user.id)
+      unless (signed_in? and current_user.id == @submission.assignment.user.id) or current_user.type == :ta
         flash[:alert] = "You can only take this action if you are the owner of the submission."
         redirect_to user_path(current_user) and return
       end
